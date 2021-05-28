@@ -7,10 +7,12 @@ import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import me.ajay.imagegallery.R
 import me.ajay.imagegallery.databinding.FragmentGalleryBinding
 import me.ajay.imagegallery.util.onQueryTextSubmit
 
+@AndroidEntryPoint
 class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
     private val galleryViewModel : GalleryViewModel by viewModels()
