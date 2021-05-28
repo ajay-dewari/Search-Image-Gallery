@@ -7,9 +7,11 @@ import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import me.ajay.imagegallery.R
+import me.ajay.imagegallery.data.GalleryImage
 import me.ajay.imagegallery.databinding.FragmentGalleryBinding
 import me.ajay.imagegallery.util.onQueryTextSubmit
 
@@ -35,6 +37,12 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
                 imageAdapter.retry()
             }
         }
+
+        imageAdapter.setOnItemClickListener(object : GalleryAdapter.OnItemClickListener {
+            override fun onItemClickListener(image: GalleryImage) {
+                //Event channel call back needed from viewModel
+            }
+        })
 
         galleryViewModel.images.observe(viewLifecycleOwner) {
             imageAdapter.submitData(viewLifecycleOwner.lifecycle, it)

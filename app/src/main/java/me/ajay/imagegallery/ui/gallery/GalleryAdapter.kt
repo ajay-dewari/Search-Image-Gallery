@@ -15,6 +15,8 @@ import me.ajay.imagegallery.databinding.ImageItemBinding
 class GalleryAdapter :
     PagingDataAdapter<GalleryImage, GalleryAdapter.ImageViewHolder>(DiffCallback()) {
 
+    private lateinit var itemClickListener: OnItemClickListener
+
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val currentImage = getItem(position)
         if (currentImage != null) {
@@ -28,9 +30,32 @@ class GalleryAdapter :
         return ImageViewHolder(binding)
     }
 
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        itemClickListener = listener
+    }
+
+    interface OnItemClickListener {
+        fun onItemClickListener(image: GalleryImage)
+    }
+
+
     inner class ImageViewHolder(private val binding: ImageItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val position = absoluteAdapterPosition
+                if (RecyclerView.NO_POSITION != position) {
+                    val item = getItem(position)
+                    if (null != item) {
+                        itemClickListener.onItemClickListener(item)
+                    }
+                }
+            }
+        }
+
         fun bind(image: GalleryImage) {
+
             binding.apply {
                 Glide.with(itemView)
                     .load(image.previewURL)
