@@ -10,7 +10,7 @@ const val EMPTY_QUERY: String = ""
 @HiltViewModel
 class GalleryViewModel @Inject constructor(): ViewModel() {
 
-    val searchQuery = MutableStateFlow(EMPTY_QUERY);
+    private val searchQuery = MutableStateFlow(EMPTY_QUERY);
 
 
     fun setSearchQuery(query: String) {

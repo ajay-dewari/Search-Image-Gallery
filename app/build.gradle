@@ -66,4 +66,8 @@ dependencies {
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltLifecycleViewModel"
     kapt "androidx.hilt:hilt-compiler:$hiltAndroidXVersion"
 
+    // Retrofit + GSON
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
 }
