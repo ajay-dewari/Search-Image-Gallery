@@ -8,8 +8,8 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
 
+    compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "me.ajay.imagegallery"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -57,11 +57,11 @@ dependencies {
 
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesAndroidVersion"
 
     // Dagger Hilt
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
     implementation "androidx.hilt:hilt-navigation-fragment:$hiltNavigationFragment"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltLifecycleViewModel"
     kapt "androidx.hilt:hilt-compiler:$hiltAndroidXVersion"
