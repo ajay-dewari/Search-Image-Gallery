@@ -6,11 +6,14 @@ import android.view.MenuInflater
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import me.ajay.imagegallery.R
 import me.ajay.imagegallery.databinding.FragmentGalleryBinding
 import me.ajay.imagegallery.util.onQueryTextSubmit
 
 class GalleryFragment : Fragment(R.layout.fragment_gallery) {
+
+    private val galleryViewModel : GalleryViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,6 +30,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
         searchView.onQueryTextSubmit { query ->
             if (query.isNotBlank()) {
                 // Query to web api image search
+                galleryViewModel.searchQuery.value = query
             }
         }
     }
