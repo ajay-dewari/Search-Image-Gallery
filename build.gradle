@@ -34,6 +34,7 @@ buildscript {
 
         retrofitVersion = '2.9.0'
         pagingVersion = '3.0.0'
+        glideVersion = '4.11.0'
     }
 
     repositories {

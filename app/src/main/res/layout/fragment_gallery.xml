@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        tools:listitem="@layout/result_image_item" />
+        tools:listitem="@layout/image_item" />
 
     <ProgressBar
         android:id="@+id/progress_bar"

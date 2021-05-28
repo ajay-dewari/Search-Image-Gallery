@@ -24,7 +24,7 @@ class GalleryViewModel @Inject constructor(
     private val imagesFlow = searchQuery.asFlow().flatMapLatest { query ->
         repository.getSearchResult(query).cachedIn(viewModelScope)
     }
-
+    val images = imagesFlow.asLiveData()
     fun setSearchQuery(query: String) {
         searchQuery.value = query
     }
