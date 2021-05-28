@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import me.ajay.imagegallery.R
 import me.ajay.imagegallery.databinding.FragmentGalleryBinding
+import me.ajay.imagegallery.util.onQueryTextSubmit
 
 class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
@@ -22,5 +23,11 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
         inflater.inflate(R.menu.gallery_search_menu, menu)
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
+
+        searchView.onQueryTextSubmit { query ->
+            if (query.isNotBlank()) {
+                // Query to web api image search
+            }
+        }
     }
 }
