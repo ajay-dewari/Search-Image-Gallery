@@ -1,0 +1,26 @@
+<resources>
+    <dimen name="standard_0">0dp</dimen>
+    <dimen name="standard_03">3dp</dimen>
+    <dimen name="standard_05">5dp</dimen>
+    <dimen name="standard_08">8dp</dimen>
+    <dimen name="standard_10">10dp</dimen>
+    <dimen name="standard_15">15dp</dimen>
+    <dimen name="standard_20">20dp</dimen>
+    <dimen name="standard_25">25dp</dimen>
+    <dimen name="standard_30">30dp</dimen>
+    <dimen name="standard_35">35dp</dimen>
+    <dimen name="standard_40">40dp</dimen>
+    <dimen name="standard_45">45dp</dimen>
+    <dimen name="standard_50">50dp</dimen>
+    <dimen name="standard_55">55dp</dimen>
+    <dimen name="standard_60">60dp</dimen>
+    <dimen name="standard_65">65dp</dimen>
+    <dimen name="standard_70">70dp</dimen>
+    <dimen name="standard_75">75dp</dimen>
+    <dimen name="standard_100">100dp</dimen>
+    <dimen name="standard_105">105dp</dimen>
+    <dimen name="standard_115">115dp</dimen>
+    <dimen name="standard_120">120dp</dimen>
+    <dimen name="standard_150">150dp</dimen>
+    <dimen name="standard_200">200dp</dimen>
+</resources>

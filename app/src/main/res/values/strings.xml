@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Image Gallery</string>
+    <string name="no_result_found">No results found for this query</string>
+    <string name="retry">Retry</string>
+    <string name="result_could_not_be_loaded">Results could not be loaded</string>
+    <string name="search_view_label">Search Images</string>
 </resources>
