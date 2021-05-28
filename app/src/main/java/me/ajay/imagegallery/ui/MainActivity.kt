@@ -1,7 +1,8 @@
-package me.ajay.imagegallery
+package me.ajay.imagegallery.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import me.ajay.imagegallery.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
