@@ -29,8 +29,8 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
         searchView.onQueryTextSubmit { query ->
             if (query.isNotBlank()) {
-                // Query to web api image search
-                galleryViewModel.searchQuery.value = query
+                galleryViewModel.setSearchQuery(query)
+                searchView.clearFocus()
             }
         }
     }

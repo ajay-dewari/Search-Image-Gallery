@@ -11,4 +11,9 @@ const val EMPTY_QUERY: String = ""
 class GalleryViewModel @Inject constructor(): ViewModel() {
 
     val searchQuery = MutableStateFlow(EMPTY_QUERY);
+
+
+    fun setSearchQuery(query: String) {
+        searchQuery.value = query
+    }
 }
