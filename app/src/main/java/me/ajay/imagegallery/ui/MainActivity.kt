@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         internetBroadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(contxt: Context, intent: Intent?) {
 
+
             }
         }
         this.registerReceiver(internetBroadcastReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
