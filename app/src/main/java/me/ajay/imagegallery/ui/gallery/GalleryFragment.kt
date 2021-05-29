@@ -29,7 +29,10 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
         binding.apply {
             recyclerView.apply {
                 itemAnimator = null
-                adapter = imageAdapter
+                adapter = imageAdapter.withLoadStateHeaderAndFooter(
+                    header = ImageLoadStateFooterAdapter { imageAdapter.retry() },
+                    footer = ImageLoadStateFooterAdapter { imageAdapter.retry() }
+                )
                 layoutManager = GridLayoutManager(requireContext(), 3)
                 setHasFixedSize(true)
             }
