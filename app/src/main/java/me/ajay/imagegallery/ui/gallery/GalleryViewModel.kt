@@ -42,7 +42,14 @@ class GalleryViewModel @Inject constructor(
         }
     }
 
+    fun onRetryClicked() {
+        viewModelScope.launch {
+            eventChannel.send(GalleryEvent.RetryLoading)
+        }
+    }
+
     sealed class GalleryEvent {
         data class NavigateToDetails(val image: GalleryImage) : GalleryEvent()
+        object RetryLoading : GalleryEvent()
     }
 }

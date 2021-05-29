@@ -34,8 +34,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
                 setHasFixedSize(true)
             }
             buttonRetry.setOnClickListener {
-                //Event channel call back needed from viewModel
-                imageAdapter.retry()
+                galleryViewModel.onRetryClicked()
             }
         }
 
@@ -54,6 +53,9 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
                 when(event) {
                     is GalleryViewModel.GalleryEvent.NavigateToDetails -> {
                         //navigate to detail screen
+                    }
+                    is GalleryViewModel.GalleryEvent.RetryLoading -> {
+                        imageAdapter.retry()
                     }
                 }
             }
