@@ -14,11 +14,13 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import me.ajay.imagegallery.R
 
-lateinit var navController: NavController
-private lateinit var internetBroadcastReceiver : BroadcastReceiver
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var navController: NavController
+    private lateinit var internetBroadcastReceiver : BroadcastReceiver
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
