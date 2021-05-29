@@ -22,4 +22,9 @@
             android:name="image"
             app:argType="me.ajay.imagegallery.data.GalleryImage" />
     </dialog>
+    <fragment
+        android:id="@+id/noInternetFragment"
+        android:name="me.ajay.imagegallery.ui.nointernet.NoInternetFragment"
+        android:label="fragment_no_internet"
+        tools:layout="@layout/fragment_no_internet" /><action android:id="@+id/action_global_noInternetFragment" app:destination="@id/noInternetFragment"/>
 </navigation>

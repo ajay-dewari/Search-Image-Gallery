@@ -25,8 +25,8 @@ class GalleryAdapter :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
-        val binding =
-            ImageItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ImageItemBinding.inflate(LayoutInflater.from(parent.context),
+            parent, false)
         return ImageViewHolder(binding)
     }
 

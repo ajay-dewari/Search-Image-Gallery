@@ -39,6 +39,7 @@ class DetailsFragment : BottomSheetDialogFragment() {
             userName.text = image.user
             imageViews.text = image.views.toString()
             liked.text = image.likes.toString()
+
             if (0L != image.favorites) {
                 favourites.isVisible = true
                 favourites.text = image.favorites.toString()

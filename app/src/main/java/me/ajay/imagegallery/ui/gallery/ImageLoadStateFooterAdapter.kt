@@ -13,11 +13,8 @@ class ImageLoadStateFooterAdapter (private val retry: () -> Unit) :
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoadStateViewHolder {
         val binding = ImageLoadStateFooterBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
+            LayoutInflater.from(parent.context), parent, false
         )
-
         return LoadStateViewHolder(binding)
     }
 
@@ -29,9 +26,7 @@ class ImageLoadStateFooterAdapter (private val retry: () -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.buttonRetry.setOnClickListener {
-                retry.invoke()
-            }
+            binding.buttonRetry.setOnClickListener { retry.invoke() }
         }
 
         fun bind(loadState: LoadState) {
