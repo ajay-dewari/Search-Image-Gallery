@@ -20,13 +20,14 @@ import me.ajay.imagegallery.R
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
-    private lateinit var internetBroadcastReceiver : BroadcastReceiver
+    private lateinit var internetBroadcastReceiver: BroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container)
+                    as NavHostFragment
         navController = navHostFragment.findNavController()
         setupActionBarWithNavController(navController)
 
@@ -43,7 +44,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        this.registerReceiver(internetBroadcastReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+        this.registerReceiver(
+            internetBroadcastReceiver, IntentFilter(
+                ConnectivityManager
+                    .CONNECTIVITY_ACTION
+            )
+        )
 
     }
 

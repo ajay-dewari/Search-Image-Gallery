@@ -25,13 +25,13 @@ class GalleryViewModel @Inject constructor(
     state: SavedStateHandle
 ) : ViewModel() {
     private val eventChannel = Channel<GalleryEvent>()
-    val galleryEvent = eventChannel.receiveAsFlow()
-
     private val searchQuery = state.getLiveData(SEARCHED_QUERY, EMPTY_QUERY)
     private val imagesFlow = searchQuery.asFlow().flatMapLatest { query ->
         repository.getSearchResult(query).cachedIn(viewModelScope)
     }
+    val galleryEvent = eventChannel.receiveAsFlow()
     val images = imagesFlow.asLiveData()
+
     fun setSearchQuery(query: String) {
         searchQuery.value = query
     }

@@ -75,7 +75,6 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
                 recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
                 buttonRetry.isVisible = loadState.source.refresh is LoadState.Error
                 textViewError.isVisible = loadState.source.refresh is LoadState.Error
-
                 if (loadState.source.refresh is LoadState.NotLoading &&
                     loadState.append.endOfPaginationReached &&
                     galleryAdapter.itemCount < 1
@@ -94,7 +93,6 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
         inflater.inflate(R.menu.gallery_search_menu, menu)
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
-
         searchView.onQueryTextSubmit { query ->
             if (query.isNotBlank()) {
                 galleryViewModel.setSearchQuery(query)
