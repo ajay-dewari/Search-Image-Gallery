@@ -36,7 +36,8 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
                     header = ImageLoadStateFooterAdapter { galleryAdapter.retry() },
                     footer = ImageLoadStateFooterAdapter { galleryAdapter.retry() }
                 )
-                layoutManager = GridLayoutManager(requireContext(), 3)
+                val gridColumnCount :Int = requireContext().resources.getInteger(R.integer.grid_view_column_count)
+                layoutManager = GridLayoutManager(requireContext(), gridColumnCount)
                 setHasFixedSize(true)
             }
             buttonRetry.setOnClickListener {
