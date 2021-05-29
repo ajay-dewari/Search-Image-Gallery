@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
@@ -31,12 +32,25 @@ class MainActivity : AppCompatActivity() {
 
         internetBroadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(contxt: Context, intent: Intent?) {
-
-
+                val noInternetFragmentID = R.id.noInternetFragment
+                if (isOnline()) {
+                    val currentId = navController.currentDestination!!.id
+                    if (noInternetFragmentID == currentId) {
+                        navController.popBackStack()
+                    }
+                } else {
+                    navController.navigate(noInternetFragmentID)
+                }
             }
         }
         this.registerReceiver(internetBroadcastReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
 
+    }
+
+    fun isOnline(): Boolean {
+        val connMgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo: NetworkInfo? = connMgr.activeNetworkInfo
+        return networkInfo?.isConnected == true
     }
 
     override fun onSupportNavigateUp(): Boolean {
