@@ -5,9 +5,11 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -25,13 +27,13 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentGalleryBinding.bind(view)
         setHasOptionsMenu(true)
-        val imageAdapter = GalleryAdapter()
+        val galleryAdapter = GalleryAdapter()
         binding.apply {
             recyclerView.apply {
                 itemAnimator = null
-                adapter = imageAdapter.withLoadStateHeaderAndFooter(
-                    header = ImageLoadStateFooterAdapter { imageAdapter.retry() },
-                    footer = ImageLoadStateFooterAdapter { imageAdapter.retry() }
+                adapter = galleryAdapter.withLoadStateHeaderAndFooter(
+                    header = ImageLoadStateFooterAdapter { galleryAdapter.retry() },
+                    footer = ImageLoadStateFooterAdapter { galleryAdapter.retry() }
                 )
                 layoutManager = GridLayoutManager(requireContext(), 3)
                 setHasFixedSize(true)
@@ -41,14 +43,14 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
             }
         }
 
-        imageAdapter.setOnItemClickListener(object : GalleryAdapter.OnItemClickListener {
+        galleryAdapter.setOnItemClickListener(object : GalleryAdapter.OnItemClickListener {
             override fun onItemClickListener(image: GalleryImage) {
                 galleryViewModel.onRecyclerViewItemClicked(image)
             }
         })
 
         galleryViewModel.images.observe(viewLifecycleOwner) {
-            imageAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+            galleryAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -58,8 +60,27 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
                         //navigate to detail screen
                     }
                     is GalleryViewModel.GalleryEvent.RetryLoading -> {
-                        imageAdapter.retry()
+                        galleryAdapter.retry()
                     }
+                }
+            }
+        }
+
+        galleryAdapter.addLoadStateListener { loadState ->
+            binding.apply {
+                progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+                buttonRetry.isVisible = loadState.source.refresh is LoadState.Error
+                textViewError.isVisible = loadState.source.refresh is LoadState.Error
+
+                if (loadState.source.refresh is LoadState.NotLoading &&
+                    loadState.append.endOfPaginationReached &&
+                    galleryAdapter.itemCount < 1
+                ) {
+                    recyclerView.isVisible = false
+                    textViewEmpty.isVisible = true
+                } else {
+                    textViewEmpty.isVisible = false
                 }
             }
         }
