@@ -5,11 +5,15 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import me.ajay.imagegallery.R
 import me.ajay.imagegallery.data.GalleryImage
 import me.ajay.imagegallery.databinding.FragmentGalleryBinding
@@ -24,28 +28,64 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentGalleryBinding.bind(view)
         setHasOptionsMenu(true)
-        val imageAdapter = GalleryAdapter()
+        val galleryAdapter = GalleryAdapter()
         binding.apply {
             recyclerView.apply {
                 itemAnimator = null
-                adapter = imageAdapter
+                adapter = galleryAdapter.withLoadStateHeaderAndFooter(
+                    header = ImageLoadStateFooterAdapter { galleryAdapter.retry() },
+                    footer = ImageLoadStateFooterAdapter { galleryAdapter.retry() }
+                )
                 layoutManager = GridLayoutManager(requireContext(), 3)
                 setHasFixedSize(true)
             }
             buttonRetry.setOnClickListener {
-                //Event channel call back needed from viewModel
-                imageAdapter.retry()
+                galleryViewModel.onRetryClicked()
             }
         }
 
-        imageAdapter.setOnItemClickListener(object : GalleryAdapter.OnItemClickListener {
+        galleryAdapter.setOnItemClickListener(object : GalleryAdapter.OnItemClickListener {
             override fun onItemClickListener(image: GalleryImage) {
-                //Event channel call back needed from viewModel
+                galleryViewModel.onRecyclerViewItemClicked(image)
             }
         })
 
         galleryViewModel.images.observe(viewLifecycleOwner) {
-            imageAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+            galleryAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            galleryViewModel.galleryEvent.collect { event ->
+                when(event) {
+                    is GalleryViewModel.GalleryEvent.NavigateToDetails -> {
+                        val action =
+                            GalleryFragmentDirections.actionGalleryFragmentToDetailsFragment(event.image)
+                        findNavController().navigate(action)
+                    }
+                    is GalleryViewModel.GalleryEvent.RetryLoading -> {
+                        galleryAdapter.retry()
+                    }
+                }
+            }
+        }
+
+        galleryAdapter.addLoadStateListener { loadState ->
+            binding.apply {
+                progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+                buttonRetry.isVisible = loadState.source.refresh is LoadState.Error
+                textViewError.isVisible = loadState.source.refresh is LoadState.Error
+
+                if (loadState.source.refresh is LoadState.NotLoading &&
+                    loadState.append.endOfPaginationReached &&
+                    galleryAdapter.itemCount < 1
+                ) {
+                    recyclerView.isVisible = false
+                    textViewEmpty.isVisible = true
+                } else {
+                    textViewEmpty.isVisible = false
+                }
+            }
         }
     }
 

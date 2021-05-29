@@ -8,7 +8,11 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
+import me.ajay.imagegallery.data.GalleryImage
 import me.ajay.imagegallery.data.ImageSearchRepository
 import javax.inject.Inject
 
@@ -20,6 +24,9 @@ class GalleryViewModel @Inject constructor(
     private val repository: ImageSearchRepository,
     state: SavedStateHandle
 ) : ViewModel() {
+    private val eventChannel = Channel<GalleryEvent>()
+    val galleryEvent = eventChannel.receiveAsFlow()
+
     private val searchQuery = state.getLiveData(SEARCHED_QUERY, EMPTY_QUERY)
     private val imagesFlow = searchQuery.asFlow().flatMapLatest { query ->
         repository.getSearchResult(query).cachedIn(viewModelScope)
@@ -27,5 +34,22 @@ class GalleryViewModel @Inject constructor(
     val images = imagesFlow.asLiveData()
     fun setSearchQuery(query: String) {
         searchQuery.value = query
+    }
+
+    fun onRecyclerViewItemClicked(image: GalleryImage) {
+        viewModelScope.launch {
+            eventChannel.send(GalleryEvent.NavigateToDetails(image))
+        }
+    }
+
+    fun onRetryClicked() {
+        viewModelScope.launch {
+            eventChannel.send(GalleryEvent.RetryLoading)
+        }
+    }
+
+    sealed class GalleryEvent {
+        data class NavigateToDetails(val image: GalleryImage) : GalleryEvent()
+        object RetryLoading : GalleryEvent()
     }
 }

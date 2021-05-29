@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/standard_150"
+    android:layout_margin="@dimen/standard_25"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.details.DetailsFragment">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_40"
+        android:background="@drawable/gradient"
+        android:padding="@dimen/standard_05"
+        android:layout_gravity="top|start">
+        <ImageView
+            android:id="@+id/user_profile"
+            android:layout_width="@dimen/standard_30"
+            android:layout_height="@dimen/standard_30"
+            android:layout_centerVertical="true" />
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/user_profile"
+            android:layout_marginLeft="@dimen/standard_03"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:maxLines="1"
+            android:maxEms="10"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/white"
+            android:layout_toEndOf="@+id/user_profile" />
+
+        <TextView
+            android:id="@+id/image_views"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/standard_05"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/white"
+            app:drawableStartCompat="@android:drawable/ic_menu_view"
+            android:drawablePadding="@dimen/standard_03"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/web_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/standard_10"
+        android:padding="@dimen/standard_05"
+        android:paddingRight="@dimen/standard_03"
+        android:background="@drawable/shape_rounded_view"
+        android:textColor="@android:color/white"
+        app:drawableStartCompat="@drawable/ic_web_24"
+        android:drawablePadding="@dimen/standard_03"/>
+
+    <TextView
+        android:id="@+id/liked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_10"
+        android:gravity="center_vertical"
+        android:layout_gravity="bottom|end"
+        android:padding="@dimen/standard_05"
+        android:background="@drawable/shape_rounded_view"
+        android:textColor="@android:color/white"
+        app:drawableEndCompat="@drawable/ic_liked_24"
+        android:drawablePadding="@dimen/standard_03" />
+
+
+    <TextView
+        android:id="@+id/favourites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/standard_50"
+        android:layout_marginRight="@dimen/standard_10"
+        android:layout_marginEnd="@dimen/standard_10"
+        android:layout_gravity="bottom|end"
+        android:gravity="center_vertical"
+        android:padding="@dimen/standard_05"
+        android:background="@drawable/shape_rounded_view"
+        android:textColor="@android:color/white"
+        app:drawableEndCompat="@drawable/ic_baseline_favorite_24"
+        android:drawablePadding="@dimen/standard_03"/>
+</FrameLayout>
