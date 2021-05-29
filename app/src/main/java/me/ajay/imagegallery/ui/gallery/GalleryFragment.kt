@@ -7,9 +7,10 @@ import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import me.ajay.imagegallery.R
 import me.ajay.imagegallery.data.GalleryImage
 import me.ajay.imagegallery.databinding.FragmentGalleryBinding
@@ -40,12 +41,22 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
         imageAdapter.setOnItemClickListener(object : GalleryAdapter.OnItemClickListener {
             override fun onItemClickListener(image: GalleryImage) {
-                //Event channel call back needed from viewModel
+                galleryViewModel.onRecyclerViewItemClicked(image)
             }
         })
 
         galleryViewModel.images.observe(viewLifecycleOwner) {
             imageAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            galleryViewModel.galleryEvent.collect { event ->
+                when(event) {
+                    is GalleryViewModel.GalleryEvent.NavigateToDetails -> {
+                        //navigate to detail screen
+                    }
+                }
+            }
         }
     }
 
