@@ -4,9 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minHeight="@dimen/standard_150"
-    android:layout_margin="@dimen/standard_25"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.detail.DetailFragment">
+    android:layout_margin="@dimen/standard_25">
 
     <ProgressBar
         android:id="@+id/progress_bar"
