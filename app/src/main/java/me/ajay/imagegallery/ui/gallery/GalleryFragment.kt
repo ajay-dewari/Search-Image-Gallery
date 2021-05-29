@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,7 +58,9 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
             galleryViewModel.galleryEvent.collect { event ->
                 when(event) {
                     is GalleryViewModel.GalleryEvent.NavigateToDetails -> {
-                        //navigate to detail screen
+                        val action =
+                            GalleryFragmentDirections.actionGalleryFragmentToDetailsFragment(event.image)
+                        findNavController().navigate(action)
                     }
                     is GalleryViewModel.GalleryEvent.RetryLoading -> {
                         galleryAdapter.retry()
