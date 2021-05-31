@@ -42,11 +42,3 @@ Screen:
 ![no_Innternet](https://user-images.githubusercontent.com/12855993/120140812-f3b97580-c1f8-11eb-8d57-651cf2d9445c.png)
 
 
-
-
-Application work flow GIF:
-
-
-![image-gallery](https://user-images.githubusercontent.com/12855993/120139319-d3d48280-c1f5-11eb-8897-0cd71fa13a99.gif)
-
-
