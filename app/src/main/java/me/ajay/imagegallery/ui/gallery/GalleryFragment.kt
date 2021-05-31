@@ -17,12 +17,12 @@ import kotlinx.coroutines.flow.collect
 import me.ajay.imagegallery.R
 import me.ajay.imagegallery.data.GalleryImage
 import me.ajay.imagegallery.databinding.FragmentGalleryBinding
-import me.ajay.imagegallery.util.onQueryTextSubmit
 
 @AndroidEntryPoint
 class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
-    private val galleryViewModel : GalleryViewModel by viewModels()
+    private val galleryViewModel: GalleryViewModel by viewModels()
+    private lateinit var searchView: SearchView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -93,12 +93,32 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.gallery_search_menu, menu)
         val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as SearchView
-        searchView.onQueryTextSubmit { query ->
-            if (query.isNotBlank()) {
-                galleryViewModel.setSearchQuery(query)
-                searchView.clearFocus()
-            }
+        searchView = searchItem.actionView as SearchView
+
+        val pendingQuery = galleryViewModel.pendingQuery.value
+        if (pendingQuery != null && pendingQuery.isNotEmpty()) {
+            searchItem.expandActionView()
+            searchView.setQuery(pendingQuery, false)
         }
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    galleryViewModel.setSearchQuery(query)
+                }
+                searchView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                galleryViewModel.pendingQuery.value = newText
+                return true
+            }
+        })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        searchView.setOnQueryTextListener(null)
     }
 }

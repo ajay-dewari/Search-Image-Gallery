@@ -1,5 +1,6 @@
 package me.ajay.imagegallery.ui.gallery
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
@@ -31,9 +32,11 @@ class GalleryViewModel @Inject constructor(
     }
     val galleryEvent = eventChannel.receiveAsFlow()
     val images = imagesFlow.asLiveData()
+    val pendingQuery = MutableLiveData(EMPTY_QUERY);
 
     fun setSearchQuery(query: String) {
         searchQuery.value = query
+        pendingQuery.value = EMPTY_QUERY
     }
 
     fun onRecyclerViewItemClicked(image: GalleryImage) {
