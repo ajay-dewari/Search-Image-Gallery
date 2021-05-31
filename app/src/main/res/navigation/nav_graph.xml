@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/galleryFragment"
         android:name="me.ajay.imagegallery.ui.gallery.GalleryFragment"
-        android:label="GalleryFragment" >
+        android:label="" >
         <action
             android:id="@+id/action_galleryFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
@@ -16,7 +16,7 @@
     <dialog
         android:id="@+id/detailsFragment"
         android:name="me.ajay.imagegallery.ui.details.DetailsFragment"
-        android:label="fragment_details"
+        android:label=""
         tools:layout="@layout/fragment_details" >
         <argument
             android:name="image"
@@ -25,6 +25,6 @@
     <fragment
         android:id="@+id/noInternetFragment"
         android:name="me.ajay.imagegallery.ui.nointernet.NoInternetFragment"
-        android:label="fragment_no_internet"
+        android:label=""
         tools:layout="@layout/fragment_no_internet" /><action android:id="@+id/action_global_noInternetFragment" app:destination="@id/noInternetFragment"/>
 </navigation>
