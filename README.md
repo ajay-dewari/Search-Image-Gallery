@@ -7,11 +7,11 @@ Image-Gallery is a Kotlin based Android Application to search and browse online 
 The app is built on the MVVM architecture with the latest android architecture components and jetpack libraries. The app uses Coroutines for concurrency, Retrofit-2 for network calls, Paging-3 for pagination, Hilt for the DI, and for navigation Navigation library from jetpack is used.
 
 ## Application overview:
-The application uses the [Pixabay api](https://pixabay.com/api/docs/) for querying the image and showing the results in the application.
+The application uses the [Pixabay api](https://pixabay.com/api/docs/) for querying the images and showing the results in the application.
 
 **Home Screen :**
-The home screen is the place wheare the search view take the query and the web api calls the [Pixabay api](https://pixabay.com/api/docs/) that resturns thousands of 
-images to make it simple and load the image with paging feature Paging-3 library is used and the app show the result very efficently without any lags.
+The home screen is the place wheare the search view take the query and the web api calls the [Pixabay api](https://pixabay.com/api/docs/) that returns thousands of 
+images in a single reaponse, to make it simple and load the image with paging feature Paging-3 library is used and the app show the result very efficently without any lags.
 
 Screen:
 
@@ -35,7 +35,7 @@ Screen:
 
 
 **No Internet Screen :**
-The application uses a dynamic BroadcastReceiver to listen the newwork connection changes and redirect the user to the noInternet screen as soon as internet is disconnected, If the connection is retain back the app will automaticaly redirect the user form no internet screen to the screen where he/she left before the internet connection was broken. 
+The application uses a dynamic BroadcastReceiver to listen the newwork connection changes and redirect the user to the no_internet screen as soon as internet is disconnected, If the connection is retain back the app will automaticaly redirect the user form no_internet screen to the screen where he/she left before the internet connection was broken. 
 
 Screen:
 
