@@ -81,9 +81,6 @@ class DetailsFragment : BottomSheetDialogFragment() {
                     }
                 }).into(imageView)
 
-            val uri = Uri.parse(image.pageURL)
-
-            val intent = Intent(Intent.ACTION_VIEW, uri)
             webSource.apply {
                 text = detailsFragmentViewModel.getHostName(image.pageURL)
                 setOnClickListener {
