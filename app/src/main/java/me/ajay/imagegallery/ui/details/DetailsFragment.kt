@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -16,6 +17,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.flow.collect
 import me.ajay.imagegallery.databinding.FragmentDetailsBinding
 
 class DetailsFragment : BottomSheetDialogFragment() {
@@ -34,8 +36,8 @@ class DetailsFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentDetailsBinding.bind(view)
+        val image = detailsFragmentViewModel.imageItem!!
         binding.apply {
-            val image = detailsFragmentViewModel.imageItem!!
             userName.text = image.user
             imageViews.text = image.views.toString()
             liked.text = image.likes.toString()
@@ -80,13 +82,26 @@ class DetailsFragment : BottomSheetDialogFragment() {
                 }).into(imageView)
 
             val uri = Uri.parse(image.pageURL)
+
             val intent = Intent(Intent.ACTION_VIEW, uri)
             webSource.apply {
                 text = detailsFragmentViewModel.getHostName(image.pageURL)
                 setOnClickListener {
-                    context.startActivity(intent)
+                    detailsFragmentViewModel.onWebSourceClicked()
                 }
                 paint.isUnderlineText = true
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            detailsFragmentViewModel.detailsEvent.collect { event ->
+                when (event) {
+                    DetailsFragmentViewModel.ImageDetailEvent.NavigateToWebSource -> {
+                        val uri = Uri.parse(image.pageURL)
+                        val intent = Intent(Intent.ACTION_VIEW, uri)
+                        startActivity(intent)
+                    }
+                }
             }
         }
     }
