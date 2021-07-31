@@ -4,7 +4,7 @@
 Image-Gallery is a Kotlin based Android Application to search and browse online gallery where user can search images from the application. The application use [Pixabay api](https://pixabay.com/api/docs/) to query the images.
 
 ## Architecture Library included
-The app is built on the MVVM architecture with the latest android architecture components and jetpack libraries. The app uses Coroutines for concurrency, Retrofit-2 for network calls, Paging-3 for pagination, Hilt for the DI, and for navigation Navigation library from jetpack is used.
+The app is build on a single activity architecture follows the MVVM architecture with the latest android architecture components and jetpack libraries. The app uses Coroutines for concurrency, Retrofit-2 for network calls, Paging-3 for pagination, Hilt for the DI, and for navigation Navigation library from jetpack is used.
 
 ## Application overview:
 The application uses the [Pixabay api](https://pixabay.com/api/docs/) for querying the images and showing the results in the application.
@@ -35,7 +35,7 @@ Screen:
 
 
 **No Internet Screen :**
-The application uses a dynamic BroadcastReceiver to listen the newwork connection changes and redirect the user to the no_internet screen as soon as internet is disconnected, If the connection is retain back the app will automaticaly redirect the user form no_internet screen to the screen where he/she left before the internet connection was broken. 
+The application uses a dynamic BroadcastReceiver to listen the network connection changes and redirect the user to the no_internet screen as soon as internet is disconnected, If the connection is retain back the app will automaticaly redirect the user form no_internet screen to the screen where he/she left before the internet connection was broken. 
 
 Screen:
 
