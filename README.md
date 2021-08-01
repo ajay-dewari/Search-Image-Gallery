@@ -7,11 +7,10 @@ Image-Gallery is a Kotlin based Android Application to search and browse online 
 The app is build on a single activity architecture follows the MVVM architecture with the latest android architecture components and jetpack libraries. The app uses Coroutines for concurrency, Retrofit-2 for network calls, Paging-3 for pagination, Hilt for the DI, and for navigation Navigation library from jetpack is used.
 
 ## Application overview:
-The application uses the [Pixabay api](https://pixabay.com/api/docs/) for querying the images and showing the results in the application.
+The application uses the [Pixabay api](https://pixabay.com/api/docs/) for querying the images and showing the results in the gridview recyclerview.
 
 **Home Screen :**
-The home screen is the place wheare the search view take the query and the web api calls the [Pixabay api](https://pixabay.com/api/docs/) that returns thousands of 
-images in a single reaponse, to make it simple and load the image with paging feature Paging-3 library is used and the app show the result very efficently without any lags.
+The home screen is the place wheare the search view take the query and the web api calls the [Pixabay api](https://pixabay.com/api/docs/) that returns hundreds of images in a single reaponse, to make it simple and load the image with paging feature Paging-3 library is used and the app show the result very efficently without any lags.
 
 Screen:
 
@@ -23,11 +22,11 @@ Screen:
 
 **Details Screen :**
 On click of the image the app show the details screen with more info of the image like: 
-The user who uploaded the image with name and image, 
-Number of views on the image,  
-Number of favourites of that image
-Number of likes on that image.
-The app also show the source of the image like the google search shows in the image search and redirect the source page.
+The user who uploaded the image with the user name and user profile image,  
+Number of views on the image,   
+Number of favourites on the image, 
+Number of likes on the image. 
+The app also show the web source of the image like the google search shows in the image search result and redirect the user to the source page.
 
 Screen:
 
