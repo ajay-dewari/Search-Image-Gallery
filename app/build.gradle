@@ -10,6 +10,7 @@ plugins {
 android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "me.ajay.imagegallery"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -37,6 +38,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+
 }
 
 dependencies {
