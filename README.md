@@ -10,7 +10,7 @@ The app is build on a single activity architecture follows the MVVM architecture
 The application uses the [Pixabay api](https://pixabay.com/api/docs/) for querying the images and showing the results in the gridview recyclerview.
 
 **Home Screen :**
-The home screen is the place wheare the search view take the query and the web api calls the [Pixabay api](https://pixabay.com/api/docs/) that returns hundreds of images in a single reaponse, to make it simple and load the image with paging feature Paging-3 library is used and the app show the result very efficently without any lags.
+The home screen is the place wheare the search view take the query and the web api calls the [Pixabay api](https://pixabay.com/api/docs/) that returns hundreds of images in a single response, to make it simple and load the image with paging feature Paging-3 library is used and the app show the result very efficently without any lags.
 
 Screen:
 
