@@ -62,7 +62,6 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
     implementation "androidx.hilt:hilt-navigation-fragment:$hiltNavigationFragment"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltLifecycleViewModel"
     kapt "androidx.hilt:hilt-compiler:$hiltAndroidXVersion"
 
     // Retrofit + GSON
